@@ -1,0 +1,30 @@
+<div class="flex flex-col items-center">
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="flex flex-col items-center p-20 rounded-md gap-10 my-40 mx-40 shadow-xl bg-gradient-to-r from-slate-800 to bg-cyan-800 text-white">
+        <h1 class="font-bold text-4xl">Login</h1>
+        <label class="flex flex-col">
+            Username:
+            <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl" type="text" placeholder="Username" formControlName="username" />
+        </label>
+    
+        <ng-container *ngIf="loginForm.controls['username']?.errors">
+            <small class="text-red-500" *ngIf="loginForm.controls['username']?.touched">
+                Username can not be empty
+            </small>
+        </ng-container>
+    
+        <label class="flex flex-col">
+            Password:
+            <input class="bg-slate-300 px-5 py-2 rounded-md shadow-xl" type="password" placeholder="Password" formControlName="password"/>
+        </label>
+    
+        <ng-container *ngIf="loginForm.controls['password']?.errors">
+            <small class="text-red-500" *ngIf="loginForm.controls['password']?.touched">
+                Password can not be empty
+            </small>
+        </ng-container>
+    
+        <button type="submit" class="bg-green-400 px-5 py-2 text-white rounded-md shadow-xl transition hover:ease-out hover:scale-110 duration-300">Login</button>
+    
+        <a class="text-blue-500 underline underline-offset-4" routerLink="/register">Create Account</a>
+    </form>
+    </div>
