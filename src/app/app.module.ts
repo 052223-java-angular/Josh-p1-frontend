@@ -15,6 +15,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 import { WatchhistoryComponent } from './pages/watchhistory/watchhistory.component';
 import { ReviewComponent } from './pages/review/review.component';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ReviewComponent } from './pages/review/review.component';
     LoginComponent,
     WatchlistComponent,
     WatchhistoryComponent,
-    ReviewComponent
+    ReviewComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
