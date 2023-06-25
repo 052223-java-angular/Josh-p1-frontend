@@ -8,14 +8,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 import { WatchhistoryComponent } from './pages/watchhistory/watchhistory.component';
 import { ReviewComponent } from './pages/review/review.component';
+import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { AboutComponent } from './pages/about/about.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AboutComponent } from './pages/about/about.component';
     WatchlistComponent,
     WatchhistoryComponent,
     ReviewComponent,
+    MovieDetailsComponent,
     AboutComponent
+
   ],
   imports: [
     BrowserModule,
