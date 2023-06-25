@@ -16,6 +16,8 @@ import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 import { WatchhistoryComponent } from './pages/watchhistory/watchhistory.component';
 import { ReviewComponent } from './pages/review/review.component';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
+import { AboutComponent } from './pages/about/about.component';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
     WatchhistoryComponent,
     ReviewComponent,
     MovieDetailsComponent,
+    AboutComponent
+
   ],
   imports: [
     BrowserModule,
