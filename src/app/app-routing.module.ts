@@ -7,11 +7,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 import { WatchhistoryComponent } from './pages/watchhistory/watchhistory.component';
 import { ReviewComponent } from './pages/review/review.component';
+import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'movie/:id', component: MovieDetailsComponent},
   {path: 'watchlist', component: WatchlistComponent},
   {path: 'watchhistory', component: WatchhistoryComponent},
   {path: 'review', component: ReviewComponent},

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Auth } from 'src/app/models/auth';
 import { LoginPayload } from 'src/app/models/login-payload';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 
@@ -42,6 +43,8 @@ export class LoginComponent implements OnInit{
     this.authService.login(payload).subscribe({
       next: value => {
         // Handle the success response
+        const auth: Auth = { ...value };
+        localStorage.setItem('auth', JSON.stringify(auth));
         this.toastr.success("Login Successful");
         this.router.navigate(['/home'])
       },

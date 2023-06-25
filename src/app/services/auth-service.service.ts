@@ -20,4 +20,30 @@ export class AuthServiceService {
   login(payload: LoginPayload): Observable<Auth> {
     return this.http.post<Auth>(`${this.baseUrl}/auth/login`, payload)
   }
+
+ 
+
+  /*-------------------LOCAL STORAGE-----------------*/
+
+  public saveSessionId(token: string): void {
+    window.sessionStorage.removeItem('sessionID');
+    window.sessionStorage.setItem('sessionID', token);
+  }
+
+  public getSessionId(): string | null {
+    return window.sessionStorage.getItem('sessionID');
+  }
+
+  public saveAccountId(id: string): void {
+    window.sessionStorage.removeItem('accountID');
+    window.sessionStorage.setItem('accountID', id);
+  }
+
+  public getAccountId(): string | null {
+    return window.sessionStorage.getItem('accountID');
+  }
+
+  clearSessionStorage(): void {
+    window.sessionStorage.clear();
+  }
 }
