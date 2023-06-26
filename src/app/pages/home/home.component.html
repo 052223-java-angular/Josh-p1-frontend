@@ -1,0 +1,196 @@
+<div class="flex p-10 m-10 flex-col">
+
+    <!--Search bar-->
+    <form class="flex-grow" [formGroup]="searchForm" (ngSubmit)="submitForm()">
+        <div class="flex">
+            <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Under
+                Contruction</label>
+            <button id="dropdown-button" data-dropdown-toggle="dropdown"
+                class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
+                type="button">All categories <svg aria-hidden="true" class="w-4 h-4 ml-1" fill="currentColor"
+                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg></button>
+            <div class="relative w-full">
+                <input type="search" formControlName="movieName"
+                    class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                    placeholder="Search Movies, Shows, Actors, Studios..." required>
+                <button type="submit"
+                    class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <!--Search bar results-->
+    <div class="flex bg-cyan-800 ">
+        <div class="flex col-span-2 mt-3" *ngFor="let s of searchResult; let i = index">
+            <div *ngIf="i < 6" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <div class="">
+                    <img src="https://image.tmdb.org/t/p/original/{{s.poster_path}}" alt="" class="rounded-t-lg cursor-pointer" [routerLink]="['movie', s.id]">
+                </div>
+                <div class="col-span-9">
+                    <h1 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{s.original_title}}</h1>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{s.overview}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--Latest Movies add later maybe
+<div id="controls-carousel" class="relative w-full" data-carousel="static" *ngIf="latestMovie">
+     Carousel wrapper 
+    <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+        <div class="hidden duration-700 ease-in-out" data-carousel-item>
+            <img src="{{latestMovie.backdrop_path}}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+        </div>
+    </div>
+</div> -->
+
+    <!--Trending-->
+    <h6 class="text-white text-3xl mt-7">Trending</h6>
+    <div class="flex my-5">
+        <div class="flex col-span-2 mt-3" *ngFor="let movie of trendingMovies?.results; let i = index">
+            <div *ngIf="i < 6" class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a [routerLink]="['/movie', movie.id]">
+                    <img class="rounded-t-lg" src="{{ movie.backdrop_path}}" alt="" [routerLink]="['/movie', movie.id]" />
+                </a>
+                <div class="p-5">
+                    <a [routerLink]="['/movie', movie.id]" [routerLink]="['/movie', movie.id]">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{movie.title}}
+                        </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Viewer Rating: {{movie.vote_average}}
+                    </p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Language: {{movie.original_language}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Popular-->
+    <h6 class="text-white text-3xl">Popular</h6>
+    <div class="flex my-5">
+        <div class="flex col-span-2 mt-3" *ngFor="let movie of popularMovies?.results; let i = index">
+            <div *ngIf="i < 6"
+                class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a [routerLink]="['/movie', movie.id]" [routerLink]="['/movie', movie.id]">
+                    <img class="rounded-t-lg" src="{{ movie.backdrop_path}}" alt="" [routerLink]="['/movie', movie.id]" />
+                </a>
+                <div class="p-5">
+                    <a [routerLink]="['/movie', movie.id]">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{movie.title}}
+                        </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Viewer Rating: {{movie.vote_average}}
+                    </p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Language: {{movie.original_language}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Now Playing-->
+    <h6 class="text-white text-3xl">Now Playing</h6>
+    <div class="flex my-5">
+        <div class="flex col-span-2 mt-3" *ngFor="let movie of nowPlayingMovies?.results; let i = index">
+            <div *ngIf="i < 6"
+                class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a [routerLink]="['/movie', movie.id]">
+                    <img class="rounded-t-lg" src="{{ movie.backdrop_path}}" alt="" [routerLink]="['/movie', movie.id]" />
+                </a>
+                <div class="p-5">
+                    <a [routerLink]="['/movie', movie.id]">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{movie.title}}
+                        </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Viewer Rating: {{movie.vote_average}}
+                    </p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Language: {{movie.original_language}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Top Rated-->
+    <h6 class="text-white text-3xl">Top Rated</h6>
+    <div class="flex my-5">
+        <div class="flex col-span-2 mt-3" *ngFor="let movie of topRated?.results; let i = index">
+            <div *ngIf="i < 6"
+                class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a [routerLink]="['/movie', movie.id]">
+                    <img class="rounded-t-lg" src="{{ movie.backdrop_path}}" alt="" [routerLink]="['/movie', movie.id]" />
+                </a>
+                <div class="p-5">
+                    <a [routerLink]="['/movie', movie.id]">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{movie.title}}
+                        </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Viewer Rating: {{movie.vote_average}}
+                    </p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Language: {{movie.original_language}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Upcoming-->
+    <h6 class="text-white text-3xl">Upcoming</h6>
+    <div class="flex  my-5">
+        <div class="flex col-span-2 mt-3" *ngFor="let movie of upcoming?.results; let i = index">
+            <div *ngIf="i < 6"
+                class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a [routerLink]="['/movie', movie.id]">
+                    <img class="rounded-t-lg" src="{{ movie.backdrop_path}}" alt="" [routerLink]="['/movie', movie.id]" />
+                </a>
+                <div class="p-5">
+                    <a [routerLink]="['/movie', movie.id]">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{movie.title}}
+                        </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Viewer Rating: {{movie.vote_average}}
+                    </p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Language: {{movie.original_language}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Originals-->
+    <h6 class="text-white text-3xl">Originals</h6>
+    <div class="flex my-5">
+        <div class="flex col-span-2 mt-3" *ngFor="let movie of originals?.results; let i = index">
+            <div *ngIf="i < 6"
+                class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                <a [routerLink]="['/movie', movie.id]">
+                    <img class="rounded-t-lg" src="{{ movie.backdrop_path}}" alt="" [routerLink]="['/movie', movie.id]" />
+                </a>
+                <div class="p-5">
+                    <a [routerLink]="['/movie', movie.id]">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{movie.title}}
+                        </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Viewer Rating: {{movie.vote_average}}
+                    </p>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Language: {{movie.original_language}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
