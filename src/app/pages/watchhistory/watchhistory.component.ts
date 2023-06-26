@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { WatchhistoryService } from 'src/app/services/watchhistory.service';
 import { WatchHistory } from './watchhistory';
+import { MovieService } from 'src/app/services/movie.service';
+import { Auth } from 'src/app/models/auth';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-watchhistory',
@@ -8,25 +11,37 @@ import { WatchHistory } from './watchhistory';
   styleUrls: ['./watchhistory.component.css']
 })
 export class WatchhistoryComponent implements OnInit {
-  watchhistory!: WatchHistory[];
+  getMovieDetailResults: any;
+  movies: any[] = [];
+  watchhistory: WatchHistory[] = [];
 
-  constructor (private watchhistoryService: WatchhistoryService) {
+  constructor (private watchhistoryService: WatchhistoryService,
+     private movieService: MovieService) {
 
   }
 
   ngOnInit(): void {
-    this.watchhistoryService.getList;
+
+    // this.watchhistoryService.getMovieList(localStorage.getItem('auth')).subscribe({
+    //   next: (resp: any[]) => {
+    //     this.movies = resp;
+    //   },
+    //   error: error => {
+    //     console.log(error);
+    //   }
+    // })
+
   }
 
   delete(){
 
   }
 
-  //retrive user watch history from the backend
-
-
-  //watch history contains a set of moveies...retrieve the movie information from external api
-  //https://api.themoviedb.org/3/find/{external_id}
-
-  //save movie information into watchhistory  
+  getMovie(id: any) {
+    this.movieService.getMovieDetails(id).subscribe((res) => {
+      console.log(res, 'getMovieDetails#');
+      this.getMovieDetailResults = res;
+    })
+  }
+   
 }

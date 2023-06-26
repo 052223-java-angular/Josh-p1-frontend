@@ -1,30 +1,24 @@
 import { Injectable } from '@angular/core';
 import { WatchHistory } from '../pages/watchhistory/watchhistory';
+import { MovieService } from './movie.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WatchhistoryService {
+  private apiBaseUrl = 'http://showtracker-env-1.eba-hwbn4ifk.us-east-2.elasticbeanstalk.com/showtracker/api';
+    private url = 'https://api.themoviedb.org/3';
+    private apiKey =  '1011018a8ee207aeea5b72b11e0ab0f8';
  
-  constructor() { }
-
-  getList(): WatchHistory[] {
-    return [
-      {
-        cover: "https://image.tmdb.org/t/p/w500/1NqwE6LP9IEdOZ57NCT51ftHtWT.jpg",
-        title: "Puss in Boots: The Last Wish",
-        release: "2022-12-21",
-        genre: "Animation, Action, Adventure, Comedy, Family",
-        trailer: "https://www.youtube.com/watch?v=tHb7WlgyaUc"
-      },
-      {
-        cover: "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
-        title: "Avatar: The Way of Water",
-        release: "2022-12-16",
-        genre: "Science Fiction, Actiom,  Adventure",
-        trailer: "https://www.youtube.com/watch?v=d9MyW72ELq0"
-      },
-    ];
+  constructor(private movieService: MovieService, private http: HttpClient ) {
   }
+
+  getMovieList(data: any): Observable<any> {
+    return this.http.get(`${this.apiBaseUrl}/history/view`);
+  }
+
 }
 

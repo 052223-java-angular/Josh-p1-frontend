@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Movie } from '../pages/home/movie';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
-  private url = 'https://api.themoviedb.org/3';
-  private apiKey = '1011018a8ee207aeea5b72b11e0ab0f8';
+    private apiBaseUrl = 'http://showtracker-env-1.eba-hwbn4ifk.us-east-2.elasticbeanstalk.com/showtracker/api';
+    private url = 'https://api.themoviedb.org/3';
+    private apiKey =  '1011018a8ee207aeea5b72b11e0ab0f8';
 
   constructor(private http: HttpClient) {
   }

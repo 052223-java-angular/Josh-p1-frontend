@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RegisterPayload } from 'src/app/models/register-payload';
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private authService: AuthServiceService,
+    private authService: AuthService,
     private router: Router,
     private toastr: ToastrService) {}
   
